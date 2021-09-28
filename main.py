@@ -1,19 +1,51 @@
-from os import listdir
-
-files = dict(zip(range(len(listdir('.'))), (file for file in os.listdir('.') if file.endswith('.py') if file != 'main.py'))
+import os
+import importlib
+from time import sleep
 
 if os.name == 'posix':
     clear = 'clear'
 elif os.name == 'nt':
     clear = 'cls'
-    
 
-""" if __name__ == '__main__':
-    cont = False
+files = dict(zip(range(len(os.listdir('.'))), (x for x in os.listdir('.') if x.endswith('.py') if x != 'main.py')))
+modules = {}
+
+count = 0
+os.system(clear)
+print('Successfully Imported Modules: ')
+for file in files.values():
+    count += 1
+    modules[count] = importlib.import_module(file[:len(file) - 3])
+    if count % 2 != 0:
+        print(str(count) + '. ' + file[:len(file) - 3], sep='', end='')
+        for x in range(20 - (len(file) - 3)):
+            print(' ', end='', sep='')
+    elif count % 2 == 0:
+        print(str(count) + '. ' + file[:len(file) - 3], sep=None, end=None)
+
+def printModules():
+    count = 0
+    for file in files.values():
+        count += 1
+        if count % 2 != 0:
+            print(str(count) + '. ' + file[:len(file) - 3], sep='', end='')
+            for x in range(20 - (len(file) - 3)):
+                print(' ', end='', sep='')
+        elif count % 2 == 0:
+            print(str(count) + '. ' + file[:len(file) - 3], sep=None, end=None)
+
+
+if __name__ == '__main__':
     while True:
-        if cont == True and input(' Input 1 to Continue Running Program:') != '1':
-            exit(0)
-        cont = True
         os.system(clear)
-        print(' 1. Default Calculator             2. Fibonacci Sequence')
-        commandRouter[input(' : ')]() """
+        printModules()
+        UserInput = input('\n : ')
+        try:
+            UserInput = int(UserInput)
+        except:
+            pass
+        if UserInput in modules.keys():
+            modules[UserInput].main()
+        else:
+            print('Invalid')
+            sleep(1)
