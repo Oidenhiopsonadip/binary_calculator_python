@@ -2,10 +2,16 @@ import os
 import importlib
 from time import sleep
 
+builtinoptions = ('Exit*', 'Info*')
+
 if os.name == 'posix':
     clear = 'clear'
 elif os.name == 'nt':
     clear = 'cls'
+
+
+
+
 
 files = dict(zip(range(len(os.listdir('.'))), (x for x in os.listdir('.') if x.endswith('.py') if x != 'main.py')))
 modules = {}
@@ -23,7 +29,7 @@ for file in files.values():
     elif count % 2 == 0:
         print(str(count) + '. ' + file[:len(file) - 3], sep=None, end=None)
 
-def printModules():
+def printModules(options=False):
     count = 0
     for file in files.values():
         count += 1
@@ -33,19 +39,42 @@ def printModules():
                 print(' ', end='', sep='')
         elif count % 2 == 0:
             print(str(count) + '. ' + file[:len(file) - 3], sep=None, end=None)
+    if options:
+        for x in builtinoptions:
+            count += 1
+            if count % 2 != 0:
+                print(str(count) + '. ' + x, sep='', end='')
+                for y in range(20 - len(x)):
+                    print(' ', sep='', end='')
+            elif count % 2 == 0:
+                print(str(count) + '. ' + x, sep=None, end=None)
+
 
 
 if __name__ == '__main__':
+    cont = False
     while True:
+        if cont and input(' Enter 1 to Continue: ') == 1:
+            pass
         os.system(clear)
-        printModules()
+        printModules(True)
         UserInput = input('\n : ')
+
         try:
             UserInput = int(UserInput)
         except:
             pass
+
         if UserInput in modules.keys():
-            modules[UserInput].main()
+            cont = True
+            if modules[UserInput].main() == 0:
+                print('Invalid')
+        elif UserInput == (len(modules) + 1):
+            exit(0)
+        elif UserInput == (len(modules) + 2):
+            os.system(clear)
+            print('info')
+            input()
         else:
             print('Invalid')
             sleep(1)
