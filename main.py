@@ -58,10 +58,8 @@ if __name__ == '__main__':
             pass
         os.system(clear)
         printModules(True)
-        UserInput = input('\n : ')
-
         try:
-            UserInput = int(UserInput)
+            UserInput = int(input('\n : '))
         except:
             pass
 
@@ -73,7 +71,9 @@ if __name__ == '__main__':
             exit(0)
         elif UserInput == (len(modules) + 2):
             os.system(clear)
-            print('info')
+            print('This is a completely modular python program for all of your calculation needs\n')
+            for x in modules:
+                print()
             input()
         else:
             print('Invalid')

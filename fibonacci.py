@@ -1,20 +1,4 @@
-def fibPrintCycle(num1, num2, cycles):
-    print(num1)
-    num1 += num2
-    num3 = 0
-    for x in range(cycles - 1):
-        print(num1)
-        num3 = num1
-        num1 += num2
-        num2 = num3
-
-def fib(num1, num2, cycles):
-    num3 = 0
-    for x in range(cycles):
-        num3 = num1
-        num1 += num2
-        num2 = num3
-    print(num1)
+info = "Program that creates the fibonacci sequence with user input for the amount of cycles and the starting number"
 
 def main():
     num1 = num2 = input('Enter Starting Number: ')
@@ -25,15 +9,24 @@ def main():
         num2 = int(num2)
         cycles = int(cycles)
         if printCycles == '1':
-            fibPrintCycle(num1, num2, cycles)
+            print(num1)
+            num1 += num2
+            num3 = 0
+            for x in range(cycles - 1):
+                print(num1)
+                num3 = num1
+                num1 += num2
+                num2 = num3
         else:
-            fib(num1, num2, cycles)
+            num3 = 0
+            for x in range(cycles):
+                num3 = num1
+                num1 += num2
+                num2 = num3
+            print(num1)
     except:
         return 0
     
 
 if __name__ == '__main__':
     main()
-
-# 3 2 2
-# 1 2 3 

@@ -1,13 +1,11 @@
 def printScreen(xlist, ylist, rnge):
-    coordlist = list(zip(xlist, ylist))
-    print(coordlist)
     for y in range(rnge):
         y = -(y - (rnge / 2))
         for x in range(rnge):
             x = (x - (rnge / 2))
             if x == 0 and y == 0:
                 print('0 ', end='', sep='')
-            elif (x, y) in coordlist:
+            elif (x, y) in list(zip(xlist, ylist)):
                 print('@ ', end='', sep='')
             else:
                 print('. ', end='', sep='')
@@ -18,7 +16,7 @@ def printScreen(xlist, ylist, rnge):
 
 
 def main():
-    UserInput = input(' y=')
+    UserInput = input(' y=').lower()
     rnge = input(' Enter Range of Graph: ')
     UserInput.replace(' ', '')
     try:
